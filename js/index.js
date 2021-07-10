@@ -13,6 +13,9 @@ function handlePlay() {
   $video.play();
   $play.hidden = true;
   $pause.hidden = false;
+  $backward.hidden = false
+  $forward.hidden = false
+  $progress.hidden = false
 }
 
 function handlePause() {

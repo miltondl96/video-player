@@ -13,9 +13,9 @@ function handlePlay() {
   $video.play();
   $play.hidden = true;
   $pause.hidden = false;
-  $backward.hidden = false
-  $forward.hidden = false
-  $progress.hidden = false
+  $backward.hidden = false;
+  $forward.hidden = false;
+  $progress.hidden = false;
 }
 
 function handlePause() {
@@ -35,6 +35,11 @@ function handleForward() {
 $progress = document.querySelector("#progress");
 $video.addEventListener("loadedmetadata", handleLoaded);
 $video.addEventListener("timeupdate", handleTimeUpdate);
+$video.addEventListener("ended", handleTimeEnded);
+
+if ($video.readyState >= 2) {
+  handleLoaded();
+}
 
 function handleLoaded() {
   $progress.max = $video.duration;
@@ -42,6 +47,11 @@ function handleLoaded() {
 
 function handleTimeUpdate() {
   $progress.value = $video.currentTime;
+}
+
+function handleTimeEnded() {
+  $play.hidden = false;
+  $pause.hidden = true;
 }
 
 $progress.addEventListener("input", handleInput);
